@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Dancing+Script:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a0a0f;
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
+  }
+
+  .book-container {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 20px 10px;
+  }
+
+  /* PAGE NAVIGATION */
+  .page-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .nav-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+  }
+  .nav-dot.active { background: #ff6b9d; transform: scale(1.3); }
+
+  /* PAGES */
+  .page {
+    display: none;
+    animation: fadeIn 0.6s ease;
+    min-height: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  .page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ==================== PAGE 1 - COVER ==================== */
+  .page-cover {
+    background: linear-gradient(135deg, #2d0a1f 0%, #1a0a0f 40%, #2d1a0a 100%);
+    padding: 40px 30px;
+    text-align: center;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .page-cover::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(255,107,157,0.15) 0%, transparent 70%);
+  }
+
+  .roses-row {
+    font-size: 28px;
+    letter-spacing: 8px;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .cover-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 52px;
+    font-weight: 700;
+    background: linear-gradient(45deg, #ff6b9d, #ffb347, #ff6b9d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .cover-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: rgba(255,255,255,0.6);
+    font-size: 16px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+  }
+
+  .cover-photo-frame {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 4px solid #ff6b9d;
+    overflow: hidden;
+    margin: 0 auto 25px;
+    box-shadow: 0 0 30px rgba(255,107,157,0.5), 0 0 60px rgba(255,107,157,0.2);
+    position: relative;
+  }
+
+  .cover-photo-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .two-months {
+    font-family: 'Dancing Script', cursive;
+    font-size: 72px;
+    font-weight: 700;
+    color: #ff6b9d;
+    line-height: 1;
+    text-shadow: 0 0 40px rgba(255,107,157,0.6);
+  }
+
+  .two-months-label {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 8px;
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+  }
+
+  .date-badge {
+    display: inline-block;
+    background: rgba(255,107,157,0.15);
+    border: 1px solid rgba(255,107,157,0.4);
+    color: #ffb8d0;
+    padding: 8px 24px;
+    border-radius: 30px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .hearts-scatter {
+    font-size: 20px;
+    letter-spacing: 12px;
+    color: #ff6b9d;
+    opacity: 0.7;
+  }
+
+  /* ==================== PAGE 2 - OUR STORY ==================== */
+  .page-story {
+    background: linear-gradient(160deg, #0d1f2d 0%, #1a0a1f 100%);
+    padding: 35px 25px;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .page-header .emoji-row {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .page-tag {
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,107,157,0.7);
+    margin-bottom: 6px;
+  }
+
+  .page-heading {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 30px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #ff6b9d, #ffb347, #ff6b9d);
+    opacity: 0.6;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 25px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,107,157,0.15);
+    border-radius: 16px;
+    padding: 18px 20px;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -25px; top: 20px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: #ff6b9d;
+    box-shadow: 0 0 10px rgba(255,107,157,0.6);
+  }
+
+  .timeline-date {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ff6b9d;
+    margin-bottom: 6px;
+  }
+
+  .timeline-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .timeline-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .timeline-emoji {
+    font-size: 28px;
+    float: right;
+    margin-top: -5px;
+  }
+
+  /* ==================== PAGE 3 - PHOTOS ==================== */
+  .page-photos {
+    background: linear-gradient(135deg, #1f0d0d 0%, #0d1f1a 100%);
+    padding: 35px 20px;
+  }
+
+  .photo-grid-1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 15px;
+  }
+
+  .photo-card {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid rgba(255,107,157,0.3);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    aspect-ratio: 3/4;
+  }
+
+  .photo-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .photo-card .photo-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    padding: 20px 12px 10px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 16px;
+    color: #fff;
+  }
+
+  .photo-card-wide {
+    grid-column: span 2;
+    aspect-ratio: 16/7;
+  }
+
+  .photo-card-wide img {
+    object-position: center 20%;
+  }
+
+  .photo-sticker {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: #ff6b9d;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    transform: rotate(3deg);
+  }
+
+  /* ==================== PAGE 4 - LOVE NOTES ==================== */
+  .page-love {
+    background: linear-gradient(160deg, #1a0a2e 0%, #2e1a0a 100%);
+    padding: 35px 25px;
+  }
+
+  .love-quote-main {
+    background: rgba(255,107,157,0.08);
+    border: 1px solid rgba(255,107,157,0.25);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    line-height: 0.5;
+    color: #ff6b9d;
+    opacity: 0.4;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.6;
+    color: #fff;
+  }
+
+  .quote-attr {
+    font-size: 12px;
+    color: rgba(255,107,157,0.7);
+    margin-top: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .love-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .love-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 18px 15px;
+    text-align: center;
+  }
+
+  .love-card .icon { font-size: 30px; margin-bottom: 8px; display: block; }
+  .love-card .label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,107,157,0.7);
+    margin-bottom: 6px;
+  }
+  .love-card .value {
+    font-family: 'Dancing Script', cursive;
+    font-size: 22px;
+    color: #fff;
+    line-height: 1.3;
+  }
+
+  .flirty-note {
+    background: rgba(255,179,71,0.08);
+    border: 1px solid rgba(255,179,71,0.2);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 15px;
+  }
+
+  .flirty-note .note-tag {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #ffb347;
+    margin-bottom: 8px;
+  }
+
+  .flirty-note .note-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* ==================== PAGE 5 - PLAYLIST ==================== */
+  .page-playlist {
+    background: linear-gradient(135deg, #0d1a0d 0%, #1a0d1a 100%);
+    padding: 35px 20px;
+  }
+
+  .spotify-card {
+    background: rgba(30,215,96,0.08);
+    border: 1px solid rgba(30,215,96,0.2);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .spotify-icon {
+    width: 50px; height: 50px;
+    background: #1ed760;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+
+  .playlist-title-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .playlist-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .song-list {
+    list-style: none;
+  }
+
+  .song-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .song-item:hover {
+    background: rgba(255,107,157,0.1);
+    border-color: rgba(255,107,157,0.3);
+    transform: translateX(4px);
+  }
+
+  .song-num {
+    width: 24px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .song-emoji { font-size: 20px; flex-shrink: 0; }
+
+  .song-info { flex: 1; }
+  .song-name {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 2px;
+    font-weight: 500;
+  }
+  .song-artist {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .song-mood {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  .mood-romantic { background: rgba(255,107,157,0.15); color: #ff6b9d; }
+  .mood-flirty { background: rgba(255,179,71,0.15); color: #ffb347; }
+  .mood-naughty { background: rgba(138,43,226,0.2); color: #da70d6; }
+  .mood-cute { background: rgba(30,215,96,0.15); color: #1ed760; }
+
+  .edit-note {
+    background: rgba(255,107,157,0.08);
+    border: 1px dashed rgba(255,107,157,0.3);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: rgba(255,107,157,0.7);
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* ==================== PAGE 6 - GAMES & FUN ==================== */
+  .page-games {
+    background: linear-gradient(135deg, #0d1a2e 0%, #2e0d1a 100%);
+    padding: 35px 20px;
+  }
+
+  .game-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 15px;
+  }
+
+  .game-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .game-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+
+  .this-or-that {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .tot-option {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .tot-option:hover, .tot-option.chosen {
+    background: rgba(255,107,157,0.15);
+    border-color: rgba(255,107,157,0.5);
+    transform: scale(1.05);
+  }
+
+  .tot-option .emoji { font-size: 26px; display: block; margin-bottom: 5px; }
+  .tot-option .text { font-size: 12px; color: rgba(255,255,255,0.7); }
+
+  .tot-vs {
+    font-family: 'Dancing Script', cursive;
+    font-size: 22px;
+    color: #ff6b9d;
+    text-align: center;
+  }
+
+  .dare-wheel-container {
+    text-align: center;
+  }
+
+  .dare-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .dare-item {
+    background: rgba(255,107,157,0.08);
+    border: 1px solid rgba(255,107,157,0.15);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+
+  .dare-item strong {
+    color: #ff6b9d;
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .spin-btn {
+    background: linear-gradient(135deg, #ff6b9d, #ffb347);
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+
+  .spin-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(255,107,157,0.4); }
+
+  .spin-result {
+    margin-top: 10px;
+    padding: 12px 15px;
+    background: rgba(255,107,157,0.1);
+    border-radius: 10px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #ff6b9d;
+    display: none;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .spin-result.show { display: flex; }
+
+  /* ==================== PAGE 7 - FOREVER ==================== */
+  .page-forever {
+    background: linear-gradient(160deg, #1a0a0f 0%, #0a1a0f 100%);
+    padding: 40px 25px;
+    text-align: center;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .forever-photos {
+    display: flex;
+    gap: 10px;
+    margin: 20px auto;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .forever-photo {
+    width: 130px; height: 160px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255,107,157,0.4);
+    flex-shrink: 0;
+    transform: rotate(-3deg);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  }
+
+  .forever-photo:nth-child(2) { transform: rotate(2deg); }
+  .forever-photo:nth-child(3) { transform: rotate(-1.5deg); }
+
+  .forever-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .forever-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 48px;
+    font-weight: 700;
+    background: linear-gradient(45deg, #ff6b9d, #ffb347);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 10px 0;
+  }
+
+  .forever-message {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.7);
+    max-width: 480px;
+    margin: 0 auto 25px;
+  }
+
+  .promise-list {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,107,157,0.15);
+    border-radius: 20px;
+    padding: 20px 25px;
+    text-align: left;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto 25px;
+  }
+
+  .promise-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+
+  .promise-item:last-child { border-bottom: none; }
+  .promise-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+  .signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 36px;
+    color: #ff6b9d;
+    margin-top: 10px;
+  }
+
+  .signature-sub {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-top: 5px;
+  }
+
+  /* NAVIGATION BUTTONS */
+  .page-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 5px;
+  }
+
+  .nav-btn {
+    background: rgba(255,107,157,0.15);
+    border: 1px solid rgba(255,107,157,0.3);
+    color: #ff6b9d;
+    padding: 10px 22px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .nav-btn:hover { background: rgba(255,107,157,0.25); transform: scale(1.02); }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; transform: none; }
+
+  .page-indicator {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .page-indicator span { color: #ff6b9d; }
+
+  /* Floating hearts animation */
+  .floating-hearts {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1000;
+  }
+
+  .fheart {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp 3s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0); opacity: 1; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-20px) scale(1.2); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="floating-hearts" id="hearts"></div>
+
+<div class="book-container">
+  <div class="page-nav" id="pageNav"></div>
+
+  <!-- PAGE 1: COVER -->
+  <div class="page active" id="page-1">
+    <div class="page-cover">
+      <div class="roses-row">🌹 🌸 🌹 🌸 🌹</div>
+      <div class="page-tag">A SPECIAL STORY OF</div>
+      <div class="cover-title">Us, Two Months<br>& Counting</div>
+      <div class="cover-subtitle">a little book of love ✨</div>
+      <div class="cover-photo-frame">
+        <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-05-31_at_00_19_04__1_.jpeg" alt="Us">
+      </div>
+      <div class="two-months">2</div>
+      <div class="two-months-label">months of magic</div>
+      <div class="date-badge">💕 CELEBRATING US 💕</div>
+      <div class="hearts-scatter">♥ ♥ ♥ ♥ ♥</div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: OUR STORY -->
+  <div class="page" id="page-2">
+    <div class="page-story">
+      <div class="page-header">
+        <div class="emoji-row">📖 ✨ 💫</div>
+        <div class="page-tag">chapter one</div>
+        <div class="page-heading">Our Story</div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Day 1 • The Beginning</div>
+          <div class="timeline-emoji">🦋</div>
+          <div class="timeline-title">That First Hello</div>
+          <div class="timeline-text">Everything changed the moment we started talking. There was something different about you — the way you made me laugh, the way you just... got it. Got me.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Week 2 • Falling</div>
+          <div class="timeline-emoji">💘</div>
+          <div class="timeline-title">Late Night Conversations</div>
+          <div class="timeline-text">We stayed up way too late, talking about everything and nothing. Your voice became my favourite sound. Your stories became my favourite escape.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Month 1 • Realizing</div>
+          <div class="timeline-emoji">🌟</div>
+          <div class="timeline-title">I Choose You, Every Day</div>
+          <div class="timeline-text">One month in and I already knew — you're the kind of person who makes ordinary days feel extraordinary. The adventures, the laughter, the teasing... all of it.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Month 2 • Us</div>
+          <div class="timeline-emoji">🔥</div>
+          <div class="timeline-title">Two Months & Still Obsessed</div>
+          <div class="timeline-text">Here we are. Two months of inside jokes, random photos, playlists shared, places explored together. And I want two hundred more months exactly like this. At least. 😏</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: PHOTOS -->
+  <div class="page" id="page-3">
+    <div class="page-photos">
+      <div class="page-header">
+        <div class="emoji-row">📸 💫 🌸</div>
+        <div class="page-tag">captured moments</div>
+        <div class="page-heading">My Favourite Views</div>
+      </div>
+      <div class="photo-grid-1">
+        <div class="photo-card">
+          <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-05-31_at_00_19_04.jpeg" alt="photo">
+          <div class="photo-sticker">SUNKISSED ✨</div>
+          <div class="photo-label">She's everything 🌞</div>
+        </div>
+        <div class="photo-card">
+          <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-05-31_at_00_19_05.jpeg" alt="photo">
+          <div class="photo-sticker">GLOWING 💛</div>
+          <div class="photo-label">The heart backdrop 💕</div>
+        </div>
+        <div class="photo-card">
+          <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-05-31_at_00_19_04__2_.jpeg" alt="photo">
+          <div class="photo-sticker">CUTIE 🌸</div>
+          <div class="photo-label">That polka dot era 🖤🤍</div>
+        </div>
+        <div class="photo-card">
+          <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-05-31_at_00_19_04__1_.jpeg" alt="photo">
+          <div class="photo-sticker">ROOFTOP 🌆</div>
+          <div class="photo-label">City girl vibes ✨</div>
+        </div>
+      </div>
+      <div style="text-align:center; font-family:'Dancing Script',cursive; font-size:22px; color:rgba(255,255,255,0.4); margin-top:10px;">
+        every photo = a new favourite 💕
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 4: LOVE NOTES -->
+  <div class="page" id="page-4">
+    <div class="page-love">
+      <div class="page-header">
+        <div class="emoji-row">💌 🔥 😏</div>
+        <div class="page-tag">only for you</div>
+        <div class="page-heading">Love Notes</div>
+      </div>
+
+      <div class="love-quote-main">
+        <span class="quote-mark">"</span>
+        <div class="quote-text">You're not just my person. You're the plot twist I didn't see coming — and the best chapter of my story.</div>
+        <div class="quote-attr">— from me, to you 💕</div>
+      </div>
+
+      <div class="love-grid">
+        <div class="love-card">
+          <span class="icon">😂</span>
+          <div class="label">Best thing about us</div>
+          <div class="value">We can't stop laughing at our own stupid jokes</div>
+        </div>
+        <div class="love-card">
+          <span class="icon">🌙</span>
+          <div class="label">My favourite moment</div>
+          <div class="value">Every late night when it's just us talking</div>
+        </div>
+        <div class="love-card">
+          <span class="icon">🔥</span>
+          <div class="label">Honest confession</div>
+          <div class="value">You make me nervous in the best possible way</div>
+        </div>
+        <div class="love-card">
+          <span class="icon">😏</span>
+          <div class="label">Naughty truth</div>
+          <div class="value">I think about you way more than I'll ever admit</div>
+        </div>
+      </div>
+
+      <div class="flirty-note">
+        <div class="note-tag">🌶️ A Little Flirty Note</div>
+        <div class="note-text">Dear you — your smile is genuinely unfair. You walk into a room and I forget what I was saying. Two months in, you're still giving me butterflies I can't explain. And honestly? I hope that never stops. 😘</div>
+      </div>
+
+      <div class="flirty-note" style="border-color: rgba(138,43,226,0.3); background: rgba(138,43,226,0.06);">
+        <div class="note-tag" style="color: #da70d6;">😈 Whispered Secret</div>
+        <div class="note-text">The way you tease me... I pretend to be annoyed but we both know I secretly love every second of it. You have absolutely no idea the effect you have. None. Zero. (Okay maybe you do. 😩)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 5: PLAYLIST -->
+  <div class="page" id="page-5">
+    <div class="page-playlist">
+      <div class="page-header">
+        <div class="emoji-row">🎵 💿 🎧</div>
+        <div class="page-tag">our soundtrack</div>
+        <div class="page-heading">The Playlist</div>
+      </div>
+
+      <div class="spotify-card">
+        <div class="spotify-icon">🎵</div>
+        <div>
+          <div class="playlist-title-main">Us. Two Months. This Feeling.</div>
+          <div class="playlist-sub">A playlist for every mood between us • Edit & add yours 💕</div>
+        </div>
+      </div>
+
+      <ul class="song-list">
+        <li class="song-item">
+          <span class="song-num">1</span>
+          <span class="song-emoji">💕</span>
+          <div class="song-info">
+            <div class="song-name">Tere Bina</div>
+            <div class="song-artist">A.R. Rahman</div>
+          </div>
+          <span class="song-mood mood-romantic">Romantic</span>
+        </li>
+        <li class="song-item">
+          <span class="song-num">2</span>
+          <span class="song-emoji">🔥</span>
+          <div class="song-info">
+            <div class="song-name">Kesariya</div>
+            <div class="song-artist">Arijit Singh</div>
+          </div>
+          <span class="song-mood mood-romantic">Romantic</span>
+        </li>
+        <li class="song-item">
+          <span class="song-num">3</span>
+          <span class="song-emoji">😏</span>
+          <div class="song-info">
+            <div class="song-name">Raataan Lambiyan</div>
+            <div class="song-artist">Jubin Nautiyal</div>
+          </div>
+          <span class="song-mood mood-flirty">Flirty</span>
+        </li>
+        <li class="song-item">
+          <span class="song-num">4</span>
+          <span class="song-emoji">🌙</span>
+          <div class="song-info">
+            <div class="song-name">Tera Ban Jaunga</div>
+            <div class="song-artist">Akhil, Tulsi Kumar</div>
+          </div>
+          <span class="song-mood mood-romantic">Romantic</span>
+        </li>
+        <li class="song-item">
+          <span class="song-num">5</span>
+          <span class="song-emoji">💋</span>
+          <div class="song-info">
+            <div class="song-name">Pehle Bhi Main</div>
+            <div class="song-artist">Vishal Mishra</div>
+          </div>
+          <span class="song-mood mood-naughty">Dreamy</span>
+        </li>
+        <li class="song-item">
+          <span class="song-num">6</span>
+          <span class="song-emoji">🌸</span>
+          <div class="song-info">
+            <div class="song-name">Fitoor</div>
+            <div class="song-artist">Arijit Singh</div>
+          </div>
+          <span class="song-mood mood-cute">Cute</span>
+        </li>
+        <li class="song-item">
+          <span class="song-num">7</span>
+          <span class="song-emoji">✨</span>
+          <div class="song-info">
+            <div class="song-name">Your song here</div>
+            <div class="song-artist">Add your favourite 🎵</div>
+          </div>
+          <span class="song-mood mood-flirty">+Add</span>
+        </li>
+      </ul>
+      <div class="edit-note">✏️ Replace the songs with YOUR actual playlist — this is just the vibe starter!</div>
+    </div>
+  </div>
+
+  <!-- PAGE 6: GAMES -->
+  <div class="page" id="page-6">
+    <div class="page-games">
+      <div class="page-header">
+        <div class="emoji-row">🎮 😈 🎲</div>
+        <div class="page-tag">let's play</div>
+        <div class="page-heading">Games For Us</div>
+      </div>
+
+      <!-- This or That -->
+      <div class="game-card">
+        <div class="game-title">🎯 This or That</div>
+        <div class="game-desc">Pick one — no thinking, just vibes. Send your answers to each other!</div>
+        <div class="this-or-that">
+          <div class="tot-option" onclick="this.classList.toggle('chosen')">
+            <span class="emoji">☕</span>
+            <span class="text">Coffee date</span>
+          </div>
+          <div class="tot-vs">or</div>
+          <div class="tot-option" onclick="this.classList.toggle('chosen')">
+            <span class="emoji">🍕</span>
+            <span class="text">Midnight pizza</span>
+          </div>
+        </div>
+        <div style="height:10px"></div>
+        <div class="this-or-that">
+          <div class="tot-option" onclick="this.classList.toggle('chosen')">
+            <span class="emoji">🎬</span>
+            <span class="text">Movie night in</span>
+          </div>
+          <div class="tot-vs">or</div>
+          <div class="tot-option" onclick="this.classList.toggle('chosen')">
+            <span class="emoji">🌃</span>
+            <span class="text">Night drive</span>
+          </div>
+        </div>
+        <div style="height:10px"></div>
+        <div class="this-or-that">
+          <div class="tot-option" onclick="this.classList.toggle('chosen')">
+            <span class="emoji">💬</span>
+            <span class="text">Text marathon</span>
+          </div>
+          <div class="tot-vs">or</div>
+          <div class="tot-option" onclick="this.classList.toggle('chosen')">
+            <span class="emoji">📞</span>
+            <span class="text">Voice call all night</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dare Spinner -->
+      <div class="game-card">
+        <div class="game-title">😈 Flirty Dare Spinner</div>
+        <div class="game-desc">Hit spin for a random dare. You HAVE to do it. Rules are rules. 😏</div>
+        <div class="dare-list">
+          <div class="dare-item"><strong>Dare 1</strong>Send a voice note saying the most embarrassing thing about yourself</div>
+          <div class="dare-item"><strong>Dare 2</strong>Text me a compliment so cheesy it makes you cringe to type</div>
+          <div class="dare-item"><strong>Dare 3</strong>Tell me a secret you've never told anyone</div>
+          <div class="dare-item"><strong>Dare 4</strong>Send your most unflattering photo. Right now. No edits 😂</div>
+          <div class="dare-item"><strong>Dare 5</strong>Call me and sing the first 10 seconds of our song</div>
+          <div class="dare-item"><strong>Dare 6</strong>Confess something you pretend not to like but actually love</div>
+        </div>
+        <div class="dare-wheel-container">
+          <button class="spin-btn" onclick="spinDare()">🎲 Spin the Dare!</button>
+          <div class="spin-result" id="dareResult"></div>
+        </div>
+      </div>
+
+      <!-- Questions -->
+      <div class="game-card">
+        <div class="game-title">💭 Ask Me Anything</div>
+        <div class="game-desc">Take turns. Answer honestly. No skipping. 😏</div>
+        <div style="display:grid; gap:8px;">
+          <div class="dare-item"><strong>Q1</strong>What's your actual first impression of me?</div>
+          <div class="dare-item"><strong>Q2</strong>What's something I do that you find adorable but won't admit?</div>
+          <div class="dare-item"><strong>Q3</strong>If we could go anywhere tomorrow, just us two — where?</div>
+          <div class="dare-item"><strong>Q4</strong>What's one thing you want us to do in the next 2 months?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 7: FOREVER -->
+  <div class="page" id="page-7">
+    <div class="page-forever">
+      <div class="page-tag" style="color:rgba(255,107,157,0.7); letter-spacing:4px; font-size:11px; text-transform:uppercase;">the last page (for now)</div>
+
+      <div class="forever-title">Here's to Us 🥂</div>
+
+      <div class="forever-photos">
+        <div class="forever-photo">
+          <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-05-31_at_00_19_10.jpeg" alt="photo">
+        </div>
+        <div class="forever-photo">
+          <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-05-31_at_00_19_11.jpeg" alt="photo">
+        </div>
+        <div class="forever-photo">
+          <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-05-31_at_00_19_10__1_.jpeg" alt="photo">
+        </div>
+      </div>
+
+      <div class="forever-message">
+        Two months is just the beginning. Here's to a thousand more moments of laughter, late nights, stolen glances, and you making everything better just by existing. I wouldn't change a single thing about us. Not one. 💕
+      </div>
+
+      <div class="promise-list">
+        <div style="font-family:'Dancing Script',cursive; font-size:20px; color:#ff6b9d; margin-bottom:12px; text-align:center;">My Promises To You</div>
+        <div class="promise-item"><span class="promise-icon">🤝</span>I'll always show up for you, even when it's inconvenient</div>
+        <div class="promise-item"><span class="promise-icon">😂</span>I'll always be the first to laugh at your jokes (even the terrible ones)</div>
+        <div class="promise-item"><span class="promise-icon">🌙</span>I'll answer your late night texts, always</div>
+        <div class="promise-item"><span class="promise-icon">🔥</span>I'll keep choosing you, every single day</div>
+        <div class="promise-item"><span class="promise-icon">💕</span>I'll make the next 2 months even better than these</div>
+      </div>
+
+      <div class="signature">Yours, always 💕</div>
+      <div class="signature-sub">happy 2 months ✨</div>
+
+      <div style="margin-top:25px; font-size:28px; letter-spacing:10px; animation:float 3s ease-in-out infinite;">
+        🌹🌸💋🌸🌹
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV BUTTONS -->
+  <div class="page-buttons">
+    <button class="nav-btn" id="prevBtn" onclick="changePage(-1)" disabled>← Back</button>
+    <div class="page-indicator">Page <span id="curPage">1</span> / 7</div>
+    <button class="nav-btn" id="nextBtn" onclick="changePage(1)">Next →</button>
+  </div>
+</div>
+
+<script>
+  let currentPage = 1;
+  const totalPages = 7;
+
+  function buildNav() {
+    const nav = document.getElementById('pageNav');
+    const labels = ['Cover','Story','Photos','Love','Playlist','Games','Forever'];
+    for(let i=1;i<=totalPages;i++){
+      const btn = document.createElement('button');
+      btn.className = 'nav-dot' + (i===1?' active':'');
+      btn.title = labels[i-1];
+      btn.onclick = () => goToPage(i);
+      nav.appendChild(btn);
+    }
+  }
+
+  function goToPage(n) {
+    document.getElementById('page-'+currentPage).classList.remove('active');
+    document.querySelectorAll('.nav-dot')[currentPage-1].classList.remove('active');
+    currentPage = n;
+    document.getElementById('page-'+currentPage).classList.add('active');
+    document.querySelectorAll('.nav-dot')[currentPage-1].classList.add('active');
+    document.getElementById('curPage').textContent = currentPage;
+    document.getElementById('prevBtn').disabled = currentPage === 1;
+    document.getElementById('nextBtn').disabled = currentPage === totalPages;
+    if(currentPage === 7) spawnHearts();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function changePage(dir) {
+    const next = currentPage + dir;
+    if(next >= 1 && next <= totalPages) goToPage(next);
+  }
+
+  const dares = [
+    "Send a voice note saying the most embarrassing thing about yourself 🙈",
+    "Text me a compliment so cheesy it makes you cringe to type 🧀💕",
+    "Tell me a secret you've never told anyone 🤫",
+    "Send your most unflattering photo. Right now. No edits! 😂",
+    "Call and sing the first 10 seconds of our favourite song 🎵",
+    "Confess something you pretend not to like but secretly love 😏",
+    "Send me a screenshot of the last thing you searched on YouTube 👀",
+    "Tell me what you were thinking about before you fell asleep last night 🌙",
+    "Do a dramatic 10-second voice memo of you professing your love 💕",
+    "Text me exactly what you would say if you had no filter right now 😈"
+  ];
+
+  function spinDare() {
+    const el = document.getElementById('dareResult');
+    el.classList.add('show');
+    let count = 0;
+    const interval = setInterval(() => {
+      el.textContent = dares[Math.floor(Math.random() * dares.length)];
+      count++;
+      if(count > 10) {
+        clearInterval(interval);
+        el.textContent = dares[Math.floor(Math.random() * dares.length)];
+      }
+    }, 100);
+  }
+
+  function spawnHearts() {
+    const container = document.getElementById('hearts');
+    const emojis = ['💕','🌸','✨','💋','🌹','💫','❤️','🔥'];
+    for(let i=0;i<12;i++){
+      setTimeout(() => {
+        const h = document.createElement('div');
+        h.className = 'fheart';
+        h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        h.style.left = Math.random()*90+'%';
+        h.style.animationDelay = Math.random()*1+'s';
+        h.style.fontSize = (16+Math.random()*16)+'px';
+        container.appendChild(h);
+        setTimeout(() => h.remove(), 3500);
+      }, i*200);
+    }
+  }
+
+  buildNav();
+</script>
+</body>
+</html>
